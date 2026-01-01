@@ -1,0 +1,13 @@
+# Office temporary files
+~$*.doc
+~$*.docx
+~$*.docm
+~$*.xls
+~$*.xlsx
+~$*.xlsm
+~$*.ppt
+~$*.pptx
+~$*.pptm
+
+# Generated output
+output/
