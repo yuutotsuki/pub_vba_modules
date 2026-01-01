@@ -4,9 +4,9 @@ Public Sub ExportInvoicesToPDFs()
     ' 設定: READMEから差し替えやすい箇所だけ定数化
     Const USE_FOLDER_DIALOG As Boolean = False
     Const OUTPUT_SUBFOLDER As String = "output"
-    Const DEFAULT_NAME_FIELD As String = "お名前"
+    Const DEFAULT_NAME_FIELD As String = "氏名"
     Const DEFAULT_LOG_KEY_FIELD As String = ""
-    Const FILE_NAME_SUFFIX As String = "様"
+    Const FILE_NAME_SUFFIX As String = ""
     Const LOG_FILE_NAME As String = "export_log.csv"
     Const DOCVAR_NAME_FIELD As String = "NameField"
     Const DOCVAR_LOG_KEY_FIELD As String = "LogKeyField"
@@ -199,7 +199,7 @@ ErrorHandler:
 End Sub
 
 Public Sub SetFileNameField()
-    SetDocumentVariableWithPrompt "NameField", "ファイル名に使う差し込みフィールド名を入力してください。", "お名前", False
+    SetDocumentVariableWithPrompt "NameField", "ファイル名に使う差し込みフィールド名を入力してください。", "氏名", False
 End Sub
 
 Public Sub SetLogKeyField()
@@ -292,7 +292,7 @@ End Function
 
 Private Function GetDocumentVariableValue(ByVal doc As Document, ByVal varName As String) As String
     On Error GoTo Missing
-    GetDocumentVariableValue = Trim$(doc.Variables(varName).Value)
+    GetDocumentVariableValue = Trim$(doc.Variables(varName).value)
     Exit Function
 Missing:
     GetDocumentVariableValue = ""
@@ -301,17 +301,17 @@ End Function
 
 Private Sub SetDocumentVariable(ByVal doc As Document, ByVal varName As String, ByVal value As String)
     On Error Resume Next
-    doc.Variables(varName).Value = value
+    doc.Variables(varName).value = value
     If Err.Number <> 0 Then
         Err.Clear
-        doc.Variables.Add Name:=varName, Value:=value
+        doc.Variables.Add Name:=varName, value:=value
     End If
     On Error GoTo 0
 End Sub
 
 Private Function GetSafeFieldValue(ByVal source As MailMergeDataSource, ByVal fieldName As String) As String
     On Error GoTo MissingField
-    GetSafeFieldValue = Trim$(source.DataFields(fieldName).Value)
+    GetSafeFieldValue = Trim$(source.DataFields(fieldName).value)
     Exit Function
 MissingField:
     GetSafeFieldValue = ""
@@ -473,7 +473,7 @@ Private Function BuildUniqueFilePath(ByVal folderPath As String, ByVal baseName 
     End If
 
     candidate = folderPath & baseName & "." & extension
-    If Not fso.FileExists(candidate) Then
+    If Not fso.fileExists(candidate) Then
         BuildUniqueFilePath = candidate
         Exit Function
     End If
@@ -482,7 +482,7 @@ Private Function BuildUniqueFilePath(ByVal folderPath As String, ByVal baseName 
     Do
         suffix = "_" & Format$(counter, "000")
         candidate = folderPath & baseName & suffix & "." & extension
-        If Not fso.FileExists(candidate) Then
+        If Not fso.fileExists(candidate) Then
             BuildUniqueFilePath = candidate
             Exit Function
         End If
@@ -510,3 +510,5 @@ Private Function CleanFileName(ByVal rawName As String, ByVal maxLen As Long) As
         CleanFileName = "Invoice"
     End If
 End Function
+
+
