@@ -2,7 +2,7 @@ Option Explicit
 
 Public Sub ExportInvoicesToPDFs()
     ' 設定: READMEから差し替えやすい箇所だけ定数化
-    Const USE_FOLDER_DIALOG As Boolean = False
+    Const USE_FOLDER_DIALOG As Boolean = True
     Const OUTPUT_SUBFOLDER As String = "output"
     Const DEFAULT_NAME_FIELD As String = "氏名"
     Const DEFAULT_LOG_KEY_FIELD As String = ""
