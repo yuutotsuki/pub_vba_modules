@@ -38,7 +38,7 @@ C:\...\output\20250101_氏名.pdf
 `ExportInvoicesToPDFs` の先頭にある定数を変更してください。
 
 ```
-Const USE_FOLDER_DIALOG As Boolean = False
+Const USE_FOLDER_DIALOG As Boolean = True
 Const OUTPUT_SUBFOLDER As String = "output"
 Const DEFAULT_NAME_FIELD As String = "お名前"
 Const DEFAULT_LOG_KEY_FIELD As String = ""
@@ -47,8 +47,8 @@ Const LOG_FILE_NAME As String = "export_log.csv"
 ```
 
 - `USE_FOLDER_DIALOG`
+  - `True`: フォルダ選択ダイアログで保存先を指定（初期設定）
   - `False`: 文書と同じ場所に `output` を自動作成
-  - `True`: フォルダ選択ダイアログで保存先を指定
 - `OUTPUT_SUBFOLDER`
   - 自動作成時のフォルダ名
 - `DEFAULT_NAME_FIELD`
